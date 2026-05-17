@@ -16,6 +16,7 @@ export const LeadsPage: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [editingLead, setEditingLead] = useState<Lead | null>(null);
   const [viewingLead, setViewingLead] = useState<Lead | null>(null);
+  const [leadToDelete, setLeadToDelete] = useState<string | null>(null);
 
   const { data, isLoading, isError, error } = useLeads(filters);
   const deleteMutation = useDeleteLead();
@@ -24,8 +25,13 @@ export const LeadsPage: React.FC = () => {
   const updateMutation = useUpdateLead();
 
   const handleDelete = (id: string) => {
-    if (window.confirm('Are you sure you want to delete this lead?')) {
-      deleteMutation.mutate(id);
+    setLeadToDelete(id);
+  };
+
+  const confirmDelete = async () => {
+    if (leadToDelete) {
+      await deleteMutation.mutateAsync(leadToDelete);
+      setLeadToDelete(null);
     }
   };
 
@@ -46,18 +52,20 @@ export const LeadsPage: React.FC = () => {
       title="Leads"
       subtitle={`${data?.pagination.totalRecords ?? 0} total leads`}
       actions={
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
           <Button
             variant="secondary"
             leftIcon={<Download className="w-4 h-4" />}
             onClick={() => exportMutation.mutate()}
             isLoading={exportMutation.isPending}
+            className="w-full sm:w-auto"
           >
             Export CSV
           </Button>
           <Button
             leftIcon={<Plus className="w-4 h-4" />}
             onClick={() => setShowCreateModal(true)}
+            className="w-full sm:w-auto"
           >
             Add Lead
           </Button>
@@ -186,6 +194,30 @@ export const LeadsPage: React.FC = () => {
             )}
           </div>
         )}
+      </Modal>
+      {/* Delete Confirmation Modal */}
+      <Modal
+        isOpen={!!leadToDelete}
+        onClose={() => setLeadToDelete(null)}
+        title="Confirm Deletion"
+        size="sm"
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setLeadToDelete(null)}>Cancel</Button>
+            <Button 
+              variant="danger" 
+              onClick={confirmDelete} 
+              isLoading={deleteMutation.isPending}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              Delete Lead
+            </Button>
+          </>
+        }
+      >
+        <p className="text-gray-600 dark:text-gray-300">
+          Are you sure you want to delete this lead? This action cannot be undone.
+        </p>
       </Modal>
     </PageLayout>
   );

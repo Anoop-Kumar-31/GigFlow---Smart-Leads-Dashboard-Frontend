@@ -37,8 +37,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                 (header) => (
                   <th
                     key={header}
-                    className="px-4 py-3 text-left font-semibold text-gray-600
-                               dark:text-gray-300 whitespace-nowrap"
+                    className={`px-4 py-3 font-semibold text-gray-600 dark:text-gray-300 whitespace-nowrap ${header === 'Actions' ? 'text-center' : 'text-left'} `}
                   >
                     {header}
                   </th>
@@ -52,13 +51,13 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                 key={lead._id}
                 className="hover:bg-primary-50/50 dark:hover:bg-primary-900/10 transition-colors group"
               >
-                <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
+                <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100 whitespace-nowrap">
                   {lead.name}
                 </td>
-                <td className="px-4 py-3 text-gray-500 dark:text-gray-400">
+                <td className="px-4 py-3 text-gray-500 dark:text-gray-400 whitespace-nowrap">
                   {lead.email}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 whitespace-nowrap">
                   <Badge label={lead.status} variant={lead.status} />
                 </td>
                 <td className="px-4 py-3">
@@ -71,7 +70,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
                     year: 'numeric',
                   })}
                 </td>
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 flex justify-center">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => onView(lead)}
@@ -111,8 +110,8 @@ export const LeadTable: React.FC<LeadTableProps> = ({
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 dark:border-gray-700">
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-4 py-3 border-t border-gray-200 dark:border-gray-700">
+        <p className="text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
           Showing{' '}
           <span className="font-medium">
             {(pagination.currentPage - 1) * pagination.limit + 1}
@@ -128,20 +127,21 @@ export const LeadTable: React.FC<LeadTableProps> = ({
           <span className="font-medium">{pagination.totalRecords}</span> leads
         </p>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-end">
           <Button
             variant="secondary"
             size="sm"
             onClick={() => onPageChange(pagination.currentPage - 1)}
             disabled={!pagination.hasPrevPage}
             leftIcon={<ChevronLeft className="w-4 h-4" />}
+            className="flex-1 sm:flex-none"
           >
             Prev
           </Button>
 
           <span className="text-sm font-medium px-3 py-1.5 rounded-lg
                            bg-primary-50 dark:bg-primary-900/20
-                           text-primary-700 dark:text-primary-300">
+                           text-primary-700 dark:text-primary-300 whitespace-nowrap">
             {pagination.currentPage} / {pagination.totalPages}
           </span>
 
@@ -150,6 +150,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
             size="sm"
             onClick={() => onPageChange(pagination.currentPage + 1)}
             disabled={!pagination.hasNextPage}
+            className="flex-1 sm:flex-none"
           >
             Next
             <ChevronRight className="w-4 h-4" />

@@ -25,7 +25,13 @@ export const LeadFilters: React.FC<LeadFiltersProps> = ({
     key: keyof ILeadFilters,
     value: string | number
   ) => {
-    onFiltersChange({ ...filters, [key]: value, page: 1 });
+    const newFilters = { ...filters, page: 1 };
+    if (value === '') {
+      delete newFilters[key];
+      onFiltersChange(newFilters);
+    } else {
+      onFiltersChange({ ...newFilters, [key]: value });
+    }
   };
 
   const handleClearFilters = () => {
