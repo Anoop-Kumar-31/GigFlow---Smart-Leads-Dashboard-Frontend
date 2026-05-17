@@ -99,6 +99,27 @@ To understand how these pieces fit together, here is the flow when a user opens 
 
 ---
 
+## 💻 Local Setup
+
+To run the frontend locally:
+
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Environment Variables:**
+   Create a `.env` file in the `frontend` root based on the provided `.env.example`.
+   ```env
+   VITE_API_URL=http://localhost:5000/api
+   ```
+3. **Start Development Server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5173`.
+
+---
+
 ## 🚀 Scripts
 
 - `npm run dev`: Starts the Vite development server with HMR.
