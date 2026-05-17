@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Mail, Lock, User, AlertCircle } from 'lucide-react';
+import { Mail, Lock, User, AlertCircle, Check, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/Button';
 import { authApi } from '../../api/auth.api';
@@ -12,7 +12,13 @@ import { UserRole } from '../../types/user.types';
 const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  password: z
+    .string()
+    .min(8, 'Password must be at least 8 characters')
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+      'Password must contain uppercase, lowercase, and number'
+    ),
   role: z.nativeEnum(UserRole).optional(),
 });
 
@@ -26,10 +32,20 @@ export const RegisterForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
   });
+
+  const passwordValue = watch('password', '');
+
+  const passwordCriteria = [
+    { label: 'At least 8 characters', met: passwordValue.length >= 8 },
+    { label: 'One uppercase letter', met: /[A-Z]/.test(passwordValue) },
+    { label: 'One lowercase letter', met: /[a-z]/.test(passwordValue) },
+    { label: 'One number', met: /\d/.test(passwordValue) },
+  ];
 
   const onSubmit = async (data: RegisterFormValues) => {
     try {
@@ -101,6 +117,29 @@ export const RegisterForm: React.FC = () => {
             placeholder="••••••••"
           />
         </div>
+        
+        {/* Live Password Feedback */}
+        <div className="pt-2 grid grid-cols-2 gap-2">
+          {passwordCriteria.map((criterion, idx) => (
+            <div key={idx} className="flex items-center gap-1.5 text-xs">
+              {criterion.met ? (
+                <Check className="w-3.5 h-3.5 text-green-500" />
+              ) : (
+                <X className="w-3.5 h-3.5 text-gray-400 dark:text-gray-600" />
+              )}
+              <span
+                className={
+                  criterion.met
+                    ? 'text-green-700 dark:text-green-400 transition-colors'
+                    : 'text-gray-500 dark:text-gray-400 transition-colors'
+                }
+              >
+                {criterion.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
         {errors.password && (
           <p className="text-xs text-red-600 mt-1">{errors.password.message}</p>
         )}
