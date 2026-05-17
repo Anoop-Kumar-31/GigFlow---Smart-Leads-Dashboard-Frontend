@@ -28,11 +28,11 @@ export const LeadTable: React.FC<LeadTableProps> = ({
   const isAdmin = user?.role === UserRole.ADMIN;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200/60 dark:border-gray-700/60 shadow-xl overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <tr className="border-b border-gray-200/60 dark:border-gray-700/60 bg-gray-50/80 dark:bg-gray-900/80 backdrop-blur-md">
               {['Name', 'Email', 'Status', 'Source', 'Created', 'Actions'].map(
                 (header) => (
                   <th
@@ -50,7 +50,7 @@ export const LeadTable: React.FC<LeadTableProps> = ({
             {leads.map((lead) => (
               <tr
                 key={lead._id}
-                className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                className="hover:bg-primary-50/50 dark:hover:bg-primary-900/10 transition-colors group"
               >
                 <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
                   {lead.name}

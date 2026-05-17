@@ -12,7 +12,7 @@ export const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-colors duration-200 bg-gradient-to-br from-indigo-50 via-slate-50 to-purple-50 dark:from-[#0B0F19] dark:via-[#111827] dark:to-indigo-950/30">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center text-primary-600 dark:text-primary-500">
           <Shield className="w-12 h-12" />
@@ -32,7 +32,7 @@ export const LoginPage: React.FC = () => {
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-xl sm:px-10 border border-gray-100 dark:border-gray-700">
+        <div className="bg-white/80 dark:bg-gray-800/60 backdrop-blur-xl py-8 px-4 shadow-2xl sm:rounded-2xl sm:px-10 border border-white/40 dark:border-gray-700/50">
           <LoginForm />
         </div>
       </div>

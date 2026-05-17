@@ -12,7 +12,7 @@ export const Sidebar: React.FC = () => {
   ];
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 h-screen sticky top-0 transition-colors duration-200">
+    <aside className="hidden lg:flex flex-col w-64 bg-white/60 dark:bg-gray-900/60 backdrop-blur-2xl border-r border-gray-200/50 dark:border-gray-800 h-screen sticky top-0 transition-colors duration-200">
       <div className="h-16 flex items-center px-6 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2 text-primary-600 dark:text-primary-500">
           <Shield className="w-8 h-8" />
@@ -29,8 +29,8 @@ export const Sidebar: React.FC = () => {
               clsx(
                 'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200',
                 isActive
-                  ? 'bg-primary-50 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400 shadow-sm'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700/50 dark:hover:text-white'
+                  ? 'bg-gradient-to-r from-primary-50 to-primary-100/50 text-primary-700 dark:from-primary-900/40 dark:to-primary-900/10 dark:text-primary-300 shadow-sm border-l-4 border-primary-500'
+                  : 'text-gray-600 hover:bg-gray-50/80 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800/50 dark:hover:text-white border-l-4 border-transparent'
               )
             }
           >

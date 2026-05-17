@@ -9,7 +9,7 @@ export const Navbar: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useThemeStore();
 
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0">
+    <header className="bg-white/60 dark:bg-gray-900/60 backdrop-blur-2xl border-b border-gray-200/50 dark:border-gray-800 h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8 shrink-0 sticky top-0 z-20">
       <div className="flex items-center gap-4">
         {/* Placeholder for breadcrumbs or search */}
       </div>
@@ -34,7 +34,7 @@ export const Navbar: React.FC = () => {
               {user?.role.replace('_', ' ')}
             </span>
           </div>
-          <div className="h-8 w-8 rounded-full bg-primary-100 dark:bg-primary-900 flex items-center justify-center text-primary-700 dark:text-primary-300">
+          <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-primary-500 to-purple-500 flex items-center justify-center text-white shadow-md ring-2 ring-white dark:ring-gray-800">
             <User className="w-5 h-5" />
           </div>
           <Button

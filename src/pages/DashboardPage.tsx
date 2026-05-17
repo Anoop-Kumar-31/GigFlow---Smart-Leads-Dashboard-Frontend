@@ -19,10 +19,10 @@ export const DashboardPage: React.FC = () => {
         {stats.map((stat) => (
           <div
             key={stat.name}
-            className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-xl border border-gray-100 dark:border-gray-700 p-5 transition-all hover:shadow-md"
+            className="bg-white/90 dark:bg-gray-800/80 backdrop-blur-md overflow-hidden shadow-sm hover:shadow-xl rounded-2xl border border-gray-100/50 dark:border-gray-700/50 p-6 transition-all duration-300 hover:-translate-y-1 group"
           >
             <div className="flex items-center">
-              <div className={`${stat.color} p-3 rounded-lg text-white shrink-0`}>
+              <div className={`${stat.color} p-3.5 rounded-xl text-white shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 <stat.icon className="h-6 w-6" />
               </div>
               <div className="ml-5 w-0 flex-1">
@@ -43,11 +43,11 @@ export const DashboardPage: React.FC = () => {
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
-        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-xl border border-gray-100 dark:border-gray-700 p-6 h-80 flex items-center justify-center">
-          <p className="text-gray-400 dark:text-gray-500 italic">Recent Activity Chart Placeholder</p>
+        <div className="bg-white/90 dark:bg-gray-800/80 backdrop-blur-md shadow-sm rounded-2xl border border-gray-100/50 dark:border-gray-700/50 p-6 h-80 flex items-center justify-center bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-800/50">
+          <p className="text-gray-400 dark:text-gray-500 italic font-medium">Recent Activity Chart Placeholder</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 shadow-sm rounded-xl border border-gray-100 dark:border-gray-700 p-6 h-80 flex items-center justify-center">
-          <p className="text-gray-400 dark:text-gray-500 italic">Leads by Source Chart Placeholder</p>
+        <div className="bg-white/90 dark:bg-gray-800/80 backdrop-blur-md shadow-sm rounded-2xl border border-gray-100/50 dark:border-gray-700/50 p-6 h-80 flex items-center justify-center bg-gradient-to-bl from-white to-gray-50 dark:from-gray-800 dark:to-gray-800/50">
+          <p className="text-gray-400 dark:text-gray-500 italic font-medium">Leads by Source Chart Placeholder</p>
         </div>
       </div>
     </PageLayout>
